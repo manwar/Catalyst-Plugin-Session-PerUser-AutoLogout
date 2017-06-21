@@ -7,6 +7,7 @@ after set_authenticated => sub {
 
     if (my $existing_session = $c->user_session->{session_id}) {
         $c->delete_session_data("${_}:$existing_session") for qw/session flash expires/;
+        $c->user_session->{logged_out} = $existing_session;
     }
 
     $c->user_session->{session_id} = $c->sessionid;
