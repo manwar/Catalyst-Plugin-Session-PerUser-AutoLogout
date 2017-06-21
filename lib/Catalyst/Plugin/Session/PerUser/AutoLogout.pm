@@ -4,9 +4,11 @@ extends 'Catalyst::Plugin::Session::PerUser';
 
 after set_authenticated => sub {
     my $c = shift;
+
     if (my $existing_session = $c->user_session->{session_id}) {
-        $c->delete_session($existing_session);
+        $c->delete_session_data("${_}:$existing_session") for qw/session flash expires/;
     }
+
     $c->user_session->{session_id} = $c->sessionid;
 };
 
