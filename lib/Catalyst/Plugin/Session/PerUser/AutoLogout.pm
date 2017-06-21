@@ -2,6 +2,8 @@ package Catalyst::Plugin::Session::PerUser::AutoLogout;
 use Moose;
 extends 'Catalyst::Plugin::Session::PerUser';
 
+our $VERSION="0.002";
+
 after set_authenticated => sub {
     my $c = shift;
 
